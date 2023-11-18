@@ -1,20 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { View } from 'react-native';
+import ToDoList from './ToDoList';
+import { NativeBaseProvider, extendTheme } from 'native-base';
+import { TodosProvider } from './TodosContext';
+
+const newColorTheme = {
+  brand: {
+    900: '#5B8DF6',
+    800: '#ffffff',
+    700: '#cccccc',
+  },
+};
+
+const theme = extendTheme({
+  colors: newColorTheme,
+});
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NativeBaseProvider theme={theme}>
+      <TodosProvider>
+        <View>
+          <ToDoList />
+        </View>
+      </TodosProvider>
+    </NativeBaseProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
